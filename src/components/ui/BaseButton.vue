@@ -1,5 +1,5 @@
 <template>
-  <button v-if="hasLink" :class="mode">
+  <button v-if="!hasLink" :class="mode">
     <slot></slot>
   </button>
   <router-link v-else :to="to" :class="mode">
