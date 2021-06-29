@@ -11,14 +11,13 @@
         <h2>Interested? Reach out now!</h2>
         <base-button hasLink :to="contactLink">Contact</base-button>
       </header>
-      <route-view></route-view>
+      <router-view></router-view>
     </base-card>
   </section>
   <section>
     <base-card>
-      <base-badge v-for="area in areas" :key="area" :id="area" :type="area" :title="area">
-        <p>{{description}}</p>
-      </base-badge>
+      <base-badge v-for="area in areas" :key="area" :id="area" :type="area" :title="area"></base-badge>
+      <p>{{description}}</p>
     </base-card>
   </section>
 </template>
@@ -36,6 +35,9 @@ export default {
       return this.selectedCoach.firstName + '' + this.selectedCoach.lastName;
     },
     contactLink() {
+      if (this.$route.path.includes('contact')) {
+        return `${this.$route.path}`;
+      }
       return this.$route.path + '/' + this.id + '/contact';
     },
     areas() {
@@ -50,7 +52,6 @@ export default {
   },
   created() {
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(coach => {
-      console.log(this.id, coach.id);
       return coach.id === this.id;
     });
   }

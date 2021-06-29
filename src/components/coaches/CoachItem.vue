@@ -20,6 +20,9 @@ export default {
       return this.firstName + '' + this.lastName;
     },
     contactLink() {
+      if (this.$route.path.includes('contact')) {
+        return `${this.$route.path}`;
+      }
       return this.$route.path + '/' + this.id + '/contact';
     },
     detailLink() {
